@@ -44,6 +44,8 @@ if(totalTopics == null) totalTopics = 0;
 
 <meta charset="UTF-8">
 <title>CodeVault Dashboard</title>
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -174,7 +176,9 @@ a{
 <i class="fa-solid fa-chart-line icon"></i>
 
 <h4 class="mt-3">Analytics</h4>
-
+<a href="LogoutServlet">
+    <i class="bi bi-box-arrow-right"></i> Logout
+</a>
 </div>
 
 </a>

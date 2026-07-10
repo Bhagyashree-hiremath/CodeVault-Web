@@ -1,57 +1,179 @@
+/* ===========================
+   CodeVault Dashboard Styles
+=========================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
     background:#0D1117;
-    color:white;
+    color:#fff;
 }
 
-.hero{
+/* Sidebar */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:240px;
     height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background:#161B22;
+    box-shadow:3px 0 15px rgba(0,0,0,0.4);
+}
+
+.sidebar h2{
+    color:#58A6FF;
     text-align:center;
-    background:linear-gradient(135deg,#0D1117,#161B22);
+    padding:25px 0;
+    margin-bottom:20px;
 }
 
-.container{
-    max-width:900px;
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:16px 25px;
+    font-size:17px;
+    transition:0.3s;
 }
 
-h1{
-    font-size:70px;
+.sidebar a i{
+    margin-right:12px;
+}
+
+.sidebar a:hover{
+    background:#58A6FF;
+    color:#0D1117;
+}
+
+/* Main Content */
+
+.main{
+    margin-left:240px;
+    padding:30px;
+}
+
+/* Top Bar */
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h3{
     color:#58A6FF;
 }
 
-h3{
-    margin-top:20px;
-    font-weight:400;
-    color:#c9d1d9;
+.topbar h5{
+    color:#C9D1D9;
 }
 
-p{
-    margin-top:20px;
-    color:#8b949e;
-    line-height:28px;
+/* Statistics Cards */
+
+.stat-card{
+    background:#161B22;
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    transition:0.4s;
+    border:1px solid transparent;
 }
 
-.btn{
-    display:inline-block;
-    margin-top:40px;
-    padding:15px 35px;
-    background:#238636;
+.stat-card:hover{
+    transform:translateY(-8px);
+    border-color:#58A6FF;
+    box-shadow:0 0 20px rgba(88,166,255,0.4);
+}
+
+.stat-card h5{
+    color:#C9D1D9;
+    margin-bottom:10px;
+}
+
+.stat-card h2{
+    color:#58A6FF;
+    font-size:40px;
+}
+
+/* Feature Cards */
+
+.card{
+    background:#161B22;
+    border:none;
+    border-radius:20px;
     color:white;
-    text-decoration:none;
-    border-radius:10px;
-    transition:.3s;
+    transition:0.4s;
 }
 
-.btn:hover{
-    background:#2ea043;
-    transform:translateY(-4px);
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 20px rgba(88,166,255,0.4);
+}
+
+.icon{
+    font-size:50px;
+    color:#58A6FF;
+}
+
+.card h4{
+    margin-top:20px;
+    font-size:22px;
+}
+
+/* Buttons */
+
+.btn-primary{
+    background:#58A6FF;
+    border:none;
+}
+
+.btn-primary:hover{
+    background:#3B82F6;
+}
+
+/* Tables */
+
+.table{
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.table thead{
+    background:#21262D;
+}
+
+.table tbody tr:hover{
+    background:#30363D;
+}
+
+/* Forms */
+
+.form-control,
+.form-select{
+    background:#21262D;
+    border:1px solid #30363D;
+    color:white;
+}
+
+.form-control:focus,
+.form-select:focus{
+    background:#21262D;
+    color:white;
+    border-color:#58A6FF;
+    box-shadow:none;
+}
+
+/* Footer */
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#8B949E;
 }
