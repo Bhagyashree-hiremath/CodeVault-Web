@@ -1,31 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
 
-<%@ page import="java.util.List" %>
-<%@ page import="model.Question" %>
+<%@ page import="java.util.List"%>
+<%@ page import="model.Question"%>
+
+<%
+List<Question> list = (List<Question>) request.getAttribute("questions");
+%>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>View Questions</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
+<style>
+body{
+    background:#0D1117;
+    color:white;
+}
+
+.card{
+    background:#161B22;
+    border-radius:15px;
+}
+
+table{
+    border-radius:10px;
+    overflow:hidden;
+}
+
+h2{
+    color:#58A6FF;
+}
+</style>
+
 </head>
 
-<body class="bg-dark text-white">
+<body>
 
 <div class="container mt-5">
 
-<h2 class="text-info mb-4">
-📚 All Interview Questions
-</h2>
+<div class="card p-4">
 
-<table class="table table-dark table-bordered table-hover">
+<h2 class="text-center mb-4">📚 All Interview Questions</h2>
+
+<table class="table table-dark table-hover table-bordered">
+
+<thead>
 
 <tr>
 
@@ -38,12 +62,14 @@ pageEncoding="UTF-8"%>
 
 </tr>
 
-<%
+</thead>
 
-List<Question> list = (List<Question>)request.getAttribute("questions");
+<tbody>
+
+<%
+if(list != null){
 
 for(Question q : list){
-
 %>
 
 <tr>
@@ -57,26 +83,57 @@ for(Question q : list){
 <td><%= q.getDifficulty() %></td>
 
 <td><%= q.getCompany() %></td>
+
 <td>
-    <a href="DeleteQuestionServlet?id=<%= q.getId() %>"
-       class="btn btn-danger btn-sm"
-       onclick="return confirm('Are you sure you want to delete this question?');">
-        Delete
-    </a>
+
+<a href="EditQuestionServlet?id=<%= q.getId() %>"
+class="btn btn-warning btn-sm">
+✏️ Edit
+</a>
+
+<a href="DeleteQuestionServlet?id=<%= q.getId() %>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Are you sure you want to delete this question?')">
+🗑 Delete
+</a>
+
 </td>
 
 </tr>
 
 <%
-
 }
 
+}else{
 %>
 
+<tr>
+
+<td colspan="6" class="text-center">
+No Questions Found
+</td>
+
+</tr>
+
+<%
+}
+%>
+
+</tbody>
+
 </table>
+
+<div class="text-center mt-3">
+
+<a href="dashboard.jsp" class="btn btn-primary">
+🏠 Back to Dashboard
+</a>
+
+</div>
+
+</div>
 
 </div>
 
 </body>
-
 </html>

@@ -2,16 +2,14 @@ package dao;
 
 import model.Question;
 import util.DBConnection;
-import java.sql.ResultSet;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 public class QuestionDAO {
 
+    // Add Question
     public boolean addQuestion(Question question) {
 
         String sql = "INSERT INTO questions(question, topic, difficulty, company) VALUES (?, ?, ?, ?)";
@@ -35,6 +33,8 @@ public class QuestionDAO {
 
         return false;
     }
+
+    // View All Questions
     public List<Question> getAllQuestions() {
 
         List<Question> list = new ArrayList<>();
@@ -42,6 +42,7 @@ public class QuestionDAO {
         String sql = "SELECT * FROM questions";
 
         try {
+
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -65,15 +66,79 @@ public class QuestionDAO {
 
         return list;
     }
+
+    // Delete Question
     public boolean deleteQuestion(int id) {
 
         String sql = "DELETE FROM questions WHERE id=?";
 
         try {
+
             Connection conn = DBConnection.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
 
             ps.setInt(1, id);
+
+            int rows = ps.executeUpdate();
+
+            return rows > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Get Question By ID
+    public Question getQuestionById(int id) {
+
+        Question question = null;
+
+        String sql = "SELECT * FROM questions WHERE id=?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                question = new Question();
+
+                question.setId(rs.getInt("id"));
+                question.setQuestion(rs.getString("question"));
+                question.setTopic(rs.getString("topic"));
+                question.setDifficulty(rs.getString("difficulty"));
+                question.setCompany(rs.getString("company"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return question;
+    }
+
+    // Update Question
+    public boolean updateQuestion(Question question) {
+
+        String sql = "UPDATE questions SET question=?, topic=?, difficulty=?, company=? WHERE id=?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, question.getQuestion());
+            ps.setString(2, question.getTopic());
+            ps.setString(3, question.getDifficulty());
+            ps.setString(4, question.getCompany());
+            ps.setInt(5, question.getId());
 
             int rows = ps.executeUpdate();
 
