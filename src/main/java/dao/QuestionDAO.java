@@ -150,4 +150,103 @@ public class QuestionDAO {
 
         return false;
     }
+ // Search Questions by Topic
+    public List<Question> searchByTopic(String topic) {
+
+        List<Question> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM questions WHERE topic LIKE ?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setString(1, "%" + topic + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Question q = new Question();
+
+                q.setId(rs.getInt("id"));
+                q.setQuestion(rs.getString("question"));
+                q.setTopic(rs.getString("topic"));
+                q.setDifficulty(rs.getString("difficulty"));
+                q.setCompany(rs.getString("company"));
+
+                list.add(q);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+    public int getTotalQuestions() {
+
+        int count = 0;
+
+        String sql = "SELECT COUNT(*) FROM questions";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+    public int getTotalCompanies() {
+
+        int count = 0;
+
+        String sql = "SELECT COUNT(DISTINCT company) FROM questions";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
+    public int getTotalTopics() {
+
+        int count = 0;
+
+        String sql = "SELECT COUNT(DISTINCT topic) FROM questions";
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 }

@@ -1,5 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%
+Integer totalQuestions = (Integer) request.getAttribute("totalQuestions");
+Integer totalCompanies = (Integer) request.getAttribute("totalCompanies");
+Integer totalTopics = (Integer) request.getAttribute("totalTopics");
+
+if(totalQuestions == null) totalQuestions = 0;
+if(totalCompanies == null) totalCompanies = 0;
+if(totalTopics == null) totalTopics = 0;
+%>
+<div class="container mt-4">
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<div class="card p-4 text-center">
+<h5>📚 Total Questions</h5>
+<h2><%= totalQuestions %></h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-4 text-center">
+<h5>🏢 Companies</h5>
+<h2><%= totalCompanies %></h2>
+</div>
+</div>
+
+<div class="col-md-4">
+<div class="card p-4 text-center">
+<h5>📖 Topics</h5>
+<h2><%= totalTopics %></h2>
+</div>
+</div>
+
+</div>
+
+</div>
 
 <!DOCTYPE html>
 <html>
@@ -111,18 +148,18 @@ a{
 <!-- Search -->
 
 <div class="col-md-3">
-
-<a href="#">
+<a href="search.jsp" style="text-decoration:none;">
 
 <div class="card p-4 text-center">
 
 <i class="fa-solid fa-magnifying-glass icon"></i>
 
-<h4 class="mt-3">Search</h4>
+<h4 class="mt-3">Search Questions</h4>
 
 </div>
 
 </a>
+
 
 </div>
 
